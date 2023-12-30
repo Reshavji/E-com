@@ -4,29 +4,51 @@ import './Cart.css';
 
 const Cart = () => {
   const [{ cart }, dispatch] = useStateValue();
-  const [price, setPrice] = useState(0);
+  const [quantities, setQuantities] = useState({});
+  const [totalPrice, setTotalPrice] = useState(0);
 
-  const calculateTotalPrice = () => {
+  useEffect(() => {
+    let calculatedQuantities = {};
     let totalPrice = 0;
+
     cart.forEach(item => {
-      totalPrice += item.price;
+      calculatedQuantities[item.id] = 1; // Set initial quantity as 1 for each item
+      totalPrice += item.price; // Calculate initial total price based on the item prices
     });
-    return totalPrice;
-  };
+
+    setQuantities(calculatedQuantities);
+    setTotalPrice(totalPrice);
+  }, [cart]);
 
   const handleDecrease = (itemId) => {
-    dispatch({ type: 'DECREASE_QUANTITY', id: itemId });
+    const updatedQuantities = { ...quantities };
+
+    if (updatedQuantities[itemId] > 1) {
+      updatedQuantities[itemId] -= 1;
+      setQuantities(updatedQuantities);
+      recalculateTotal(updatedQuantities);
+    }
   };
 
   const handleIncrease = (itemId) => {
-    dispatch({ type: 'INCREASE_QUANTITY', id: itemId });
+    const updatedQuantities = { ...quantities };
+
+    updatedQuantities[itemId] = (updatedQuantities[itemId] || 1) + 1;
+    setQuantities(updatedQuantities);
+    recalculateTotal(updatedQuantities);
   };
 
-  useEffect(() => {
-    const totalPrice = calculateTotalPrice();
-    setPrice(totalPrice);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [cart]);
+  const recalculateTotal = (updatedQuantities) => {
+    let totalPrice = 0;
+
+    cart.forEach(item => {
+      const quantity = updatedQuantities[item.id] || 1; // Get the updated quantity
+
+      totalPrice += item.price * quantity; // Calculate price based on updated quantity
+    });
+
+    setTotalPrice(totalPrice);
+  };
 
   return (
     <div className="cart">
@@ -35,7 +57,7 @@ const Cart = () => {
         {cart.length === 0 ? (
           <p>Your cart is empty</p>
         ) : (
-          <div>
+          <div className='cart-data'>
             {cart.map(item => (
               <div key={item.id} className="cart-item">
                 <div className="thumbnail">
@@ -47,16 +69,17 @@ const Cart = () => {
                   <p>Price: ₹{item.price}</p>
                   <div className="quantity-controls">
                     <button onClick={() => handleDecrease(item.id)}>-</button>
-                    <span>Quantity: {}</span>
+                    <span>Quantity: {quantities[item.id] || 1}</span>
                     <button onClick={() => handleIncrease(item.id)}>+</button>
                   </div>
                 </div>
               </div>
             ))}
-            <p className="total-price">Total Price: ₹{price}</p>
+            
           </div>
         )}
       </div>
+      <p className="total-price">Total Price: ₹{totalPrice}</p>
     </div>
   );
 };
