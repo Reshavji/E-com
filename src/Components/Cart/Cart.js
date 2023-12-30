@@ -3,7 +3,7 @@ import { useStateValue } from '../../Context/StateProvider';
 import './Cart.css';
 
 const Cart = () => {
-  const [{ cart }, dispatch] = useStateValue();
+  const [{ cart }] = useStateValue();
   const [quantities, setQuantities] = useState({});
   const [totalPrice, setTotalPrice] = useState(0);
 

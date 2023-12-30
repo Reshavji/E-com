@@ -9,24 +9,35 @@ import "./Home.css";
 
 const Home = () => {
   const [products, setProducts] = useState([]);
-  const [{cart}, dispatch] = useStateValue();
+  const [{ cart }, dispatch] = useStateValue();
+
   useEffect(() => {
     fetch("https://dummyjson.com/products")
       .then((res) => res.json())
       .then((data) => setProducts(data.products))
       .catch((error) => console.error("Error fetching products:", error));
-     
   }, []);
-  const handleAddToCart = (id) => {
-    // Find the product by ID
-    const productToAdd = products.find((product) => product.id === id);
 
-    // Dispatch an action to add the product to the cart
-    dispatch({
-      type: actionTypes.ADD_TO_CART,
-      item: productToAdd,
-    });}
-    console.log(cart);
+  const isInCart = (id) => {
+    return cart.some(item => item.id === id);
+  };
+
+  const handleToggleCart = (id) => {
+    const product = products.find((product) => product.id === id);
+
+    if (isInCart(id)) {
+      dispatch({
+        type: actionTypes.REMOVE_FROM_CART,
+        id: id,
+      });
+    } else {
+      dispatch({
+        type: actionTypes.ADD_TO_CART,
+        item: product,
+      });
+    }
+  };
+
   return (
     <div className="home">
       <div className="head">
@@ -61,10 +72,10 @@ const Home = () => {
                     <b>Price:</b> ₹{product.price}
                   </Typography>
                   <button
-                    onClick={() => handleAddToCart(product.id)}
+                    onClick={() => handleToggleCart(product.id)}
                     className="add-to-cart-button"
                   >
-                    Add to Cart
+                    {isInCart(product.id) ? "Remove" : "Add to Cart"}
                   </button>
                   {/* Add other product details */}
                 </CardContent>

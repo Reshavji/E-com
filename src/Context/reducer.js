@@ -8,7 +8,7 @@ export const initialState = {
 export const actionTypes = {
   SET_USER: "SET_USER",
   ADD_TO_CART: "ADD_TO_CART",
-  UPDATE_CART: "UPDATE_CART",
+  REMOVE_FROM_CART: "REMOVE_FROM_CART", // New action type
   SET_API_DATA: "SET_API_DATA",
   // Other action types
 };
@@ -25,14 +25,12 @@ const reducer = (state, action) => {
         ...state,
         cart: [...state.cart, action.item],
       };
-      //... previous cases
-
-case 'UPDATE_CART':
-  return {
-    ...state,
-    cart: action.updatedCart,
-  };
-
+    case actionTypes.REMOVE_FROM_CART: // New case for removing from cart
+      const updatedCart = state.cart.filter(item => item.id !== action.id);
+      return {
+        ...state,
+        cart: updatedCart,
+      };
     case actionTypes.SET_API_DATA:
       return {
         ...state,
