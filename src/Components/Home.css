@@ -84,20 +84,26 @@
     .home {
       gap: 10px; /* Reduce gap between sections */
     }
-  
-    .body {
-      padding: 5px; /* Adjust padding */
-    }
-  
+  .search{
+    margin-top: 25px;
+    display: flex;
+    padding: 10px;
+    align-items: center;
+  }
     .grid-container {
       padding: 8px; /* Adjust padding for smaller screens */
     }
-  
+.product-grid{
+  padding: 25px;
+}
     .card {
-      width: calc(50% - 16px); /* Display two cards per row */
+      width: 100%; /* Display two cards per row */
       margin-bottom: 16px; /* Spacing between cards */
     }
   }
+<<<<<<< HEAD
+  
+=======
   
   /* Even smaller screens, like mobile */
   @media (max-width: 600px) {
@@ -105,3 +111,4 @@
       width: 100%; /* Single column layout for smaller screens */
     }
   }
+>>>>>>> 3797a3af4600698dccf933aab5c29fc58e4c396d

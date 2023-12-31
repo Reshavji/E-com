@@ -187,3 +187,16 @@ button.login-btn {
 .logout-btn:hover {
   background-color: #d32f2f;
 }
+@media (max-width: 768px) {
+
+  .search-bar {
+    width: 100%;
+    max-width: 300px; /* Adjust max-width as needed */
+  }
+
+  #search-input {
+    width: calc(100% - 40px); /* Adjust width */
+  }
+
+  
+}
