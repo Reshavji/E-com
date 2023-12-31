@@ -13,7 +13,7 @@ const Home = () => {
   const [{ cart, apiData }, dispatch] = useStateValue();
  const [searchInput, setSearchInput] = useState("");
  const [minPrice, setMinPrice] = useState(0);
- const [maxPrice, setMaxPrice] = useState(1000);
+ const [maxPrice, setMaxPrice] = useState(5000);
   useEffect(() => {
     fetch("https://dummyjson.com/products")
       .then((res) => res.json())
@@ -89,7 +89,7 @@ const Home = () => {
             valueLabelDisplay="auto"
             aria-labelledby="range-slider"
             min={0}
-            max={1000}
+            max={5000}
           />
         </div>
         </div>
