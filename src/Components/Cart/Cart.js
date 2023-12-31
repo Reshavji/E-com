@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useStateValue } from '../../Context/StateProvider';
+import DeleteForeverIcon from '@material-ui/icons/DeleteForever';
 import './Cart.css';
 
 const Cart = () => {
-  const [{ cart }] = useStateValue();
+  const [{ cart },dispatch] = useStateValue();
   const [quantities, setQuantities] = useState({});
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -49,7 +50,12 @@ const Cart = () => {
 
     setTotalPrice(totalPrice);
   };
-
+  const handleRemoveFromCart = (itemId) => {
+    dispatch({
+      type: 'REMOVE_FROM_CART',
+      id: itemId,
+    });
+  };
   return (
     <div className="cart">
       <h2>Cart</h2>
@@ -60,6 +66,9 @@ const Cart = () => {
           <div className='cart-data'>
             {cart.map(item => (
               <div key={item.id} className="cart-item">
+                <div className="remove-button" onClick={() => handleRemoveFromCart(item.id)}>
+                    <DeleteForeverIcon />
+                  </div>
                 <div className="thumbnail">
                   <img src={item.thumbnail} alt={item.title} />
                 </div>

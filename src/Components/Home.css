@@ -2,18 +2,20 @@
     display:flex;
     flex-wrap: nowrap;
     flex-direction: column;
-    gap: 65px;
+    gap: 40px;
     overflow: hidden;
 }
 .body{
-    padding: 10px 10px;
+    padding: 10px 0px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 /* Styling for the grid and cards */
 .grid-container {
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
-    gap: 5px;
     padding: 16px; 
   }
     
@@ -65,13 +67,26 @@
   .add-to-cart-button:hover {
     background-color: #f57c00;
   }
+  .search{
+    padding: 10px ;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 50px;
+    background-color: rgb(86, 88, 91);
+  }
+  .price-filter {
+    color: rgb(255, 255, 255); /* Set text color to white */
+  }
+
   @media (max-width: 600px) {
     .home {
-      gap: 20px; /* Reduce gap between sections */
+      gap: 10px; /* Reduce gap between sections */
     }
   
     .body {
-      padding: 10px; /* Adjust padding */
+      padding: 5px; /* Adjust padding */
     }
   
     .grid-container {
