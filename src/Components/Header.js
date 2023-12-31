@@ -8,7 +8,7 @@ import './Header.css';
 import { Link } from 'react-router-dom';
 
 function Header() {
-  const [{ user }, dispatch] = useStateValue();
+  const [{ user, cart }, dispatch] = useStateValue();
   const [showUserOptions, setShowUserOptions] = useState(false);
 
   const handleLogout = () => {
@@ -43,8 +43,13 @@ function Header() {
         <div className='header-icons'>
           <Link to='/cart'>
             {/* Use Link to navigate to '/cart' route */}
+            {cart.length >= 0 && (
+              <span className='cart-notification'>{cart.length}</span>
+            )}
             <ShoppingCartOutlinedIcon className='cart-icon' />
+            
             <span className='header-text'>Cart</span>
+           
           </Link>
           <div
             className='avatar'
