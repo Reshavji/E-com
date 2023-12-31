@@ -20,7 +20,6 @@
     display: flex;
     align-self: center;
 }
-/* CSS for the button with the class name 'login-btn' */
 
 /* Reset default button styles */
 button.login-btn {
@@ -98,6 +97,7 @@ button.login-btn {
   .header-text{
     font-size: 1.1rem;
     font-weight: 600;
+    margin-left: 10px;
   }
   #logo{
     font-size: 35px;
