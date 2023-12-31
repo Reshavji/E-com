@@ -46,10 +46,7 @@ function Header() {
             {cart.length >= 0 && (
               <span className='cart-notification'>{cart.length}</span>
             )}
-            <ShoppingCartOutlinedIcon className='cart-icon' />
-            
-            <span className='header-text'>Cart</span>
-           
+            <ShoppingCartOutlinedIcon className='cart-icon' />           
           </Link>
           <div
             className='avatar'
