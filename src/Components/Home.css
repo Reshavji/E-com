@@ -101,14 +101,4 @@
       margin-bottom: 16px; /* Spacing between cards */
     }
   }
-<<<<<<< HEAD
-  
-=======
-  
-  /* Even smaller screens, like mobile */
-  @media (max-width: 600px) {
-    .card {
-      width: 100%; /* Single column layout for smaller screens */
-    }
-  }
->>>>>>> 3797a3af4600698dccf933aab5c29fc58e4c396d
+
